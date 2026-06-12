@@ -13,8 +13,8 @@ description: 仅在用户显式指名调用本 skill 时触发，不要因模糊
 
 | 任务特征 | 方法论 | 参考 |
 |---|---|---|
-| 给了入口（接口/函数/路由/Controller） | 自顶向下 | `references/methodology/top-down.md` |
-| 给了可疑操作/危险函数/扫描报告 | 自底向上 | `references/methodology/bottom-up.md` |
+| 给了入口（接口/函数/路由/Controller，有源码） | 自顶向下 | `references/methodology/top-down.md` |
+| 给了可疑操作/危险函数/扫描报告 finding（有源码） | 自底向上 | `references/methodology/bottom-up.md` |
 | 给了特定分析逻辑（如"用正则扫密钥"、"检查 JWT 校验"） | 用户自定义 | — |
 | 只给目录/项目，没说方向 | 混合（自顶向下+自底向上） | 两者 |
 | 入口和可疑点都给了 | 双向，交叉验证 | 两者 |
