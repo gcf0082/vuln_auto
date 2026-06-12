@@ -7,24 +7,24 @@ description: 仅在用户显式指名调用本 skill 时触发，不要因模糊
 
 ## 定位
 
-分析用户漏洞挖掘任务，识别输入形态和意图，推荐方法论，生成结构化策略计划。只出计划，不执行。产物是 `.vuln_strategy/strategy-{slug}-{MMDD-HHMMSS}.md`。
+先识别用户意图（审计/二次确认/入口分析/...），再根据意图分析输入和任务范围，推荐方法论，生成策略计划。只出计划，不执行。产物是 `.vuln_strategy/strategy-{slug}-{MMDD-HHMMSS}.md`。
 
-## 任务分析
+## 意图与任务分析
 
-输入形态 + 用户语言 → 意图分类 → 方法论映射：
+从用户消息中识别意图，再匹配输入形态和任务范围，映射方法论：
 
-| 输入形态 | 意图分类 | 方法论 |
+| 意图分类 | 典型输入 | 方法论 |
 |---|---|---|
-| 目录（未指定漏洞类型） | FULL_AUDIT | 混合（自顶向下+自底向上） |
-| 目录/文件 + 指定漏洞类型 | TARGETED_AUDIT | 注入类→自底向上；逻辑类→自顶向下；敏感信息→通用 |
-| 扫描报告（.sarif/.json/.html） | SCAN_TRIAGE | 自底向上（反向溯源） |
-| REST 接口 / 函数名 | ENTRY_ANALYSIS | 自顶向下（入口驱动） |
-| 指定参数/代码行 | VULN_VERIFICATION | 按 sink 或入口选方向 |
-| diff/patch | PATCH_REVIEW | 差异对比+绕过分析 |
-| URL（无源码） | BLACK_BOX | 通用黑盒 |
-| 日志文件 | LOG_ANALYSIS | 异常驱动回溯 |
-| 覆盖多个方向 | MIXED | 多方向并行列出 |
-| 无法识别 | UNKNOWN | 反问用户 |
+| FULL_AUDIT（全量审计） | 目录，未指定漏洞类型 | 混合（自顶向下+自底向上） |
+| TARGETED_AUDIT（定向审计） | 目录/文件 + 指定漏洞类型 | 注入类→自底向上；逻辑类→自顶向下；敏感信息→通用 |
+| SCAN_TRIAGE（二次确认） | 扫描报告（.sarif/.json/.html） | 自底向上（反向溯源） |
+| ENTRY_ANALYSIS（入口分析） | REST 接口 / 函数名 | 自顶向下（入口驱动） |
+| VULN_VERIFICATION（漏洞验证） | 指定参数/代码行 | 按 sink 或入口选方向 |
+| PATCH_REVIEW（补丁验证） | diff/patch | 差异对比+绕过分析 |
+| BLACK_BOX（黑盒） | URL（无源码） | 通用黑盒 |
+| LOG_ANALYSIS（日志推测） | 日志文件 | 异常驱动回溯 |
+| MIXED（混合/模糊） | 覆盖多个方向 | 多方向并行列出 |
+| UNKNOWN（无法识别） | - | 反问用户 |
 
 ## 执行步骤生成
 
