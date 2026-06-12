@@ -1,13 +1,13 @@
 ---
 name: vuln-strategy-analyzer
-description: 仅在用户显式指名调用 vuln-strategy-analyzer 时触发，不要因模糊意图主动触发。分析用户漏洞挖掘任务，识别输入形态和意图，推荐方法论，生成结构化策略计划。
+description: 仅在用户显式指名调用本 skill 时触发，不要因模糊意图主动触发。
 ---
 
 # vuln-strategy-analyzer
 
 ## 定位
 
-分析用户漏洞挖掘任务 → 输出结构化策略计划。只出计划，不执行。产物是 `.vuln_strategy/strategy-{slug}-{MMDD-HHMMSS}.md`。
+分析用户漏洞挖掘任务，识别输入形态和意图，推荐方法论，生成结构化策略计划。只出计划，不执行。产物是 `.vuln_strategy/strategy-{slug}-{MMDD-HHMMSS}.md`。
 
 ## 任务分析
 
